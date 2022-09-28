@@ -1,0 +1,16 @@
+{
+  "code-runner.defaultLanguage": "cpp",
+  "code-runner.executorMap": {
+    "cpp": "g++-12 -g -O2 -std=gnu++17 -Wall $fullFileName && ./a.out"
+  },
+  "editor.rulers": [80],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#edd40040"
+  },
+  "files.associations": {
+    "*.inc": "cpp",
+    "algorithm": "cpp",
+    "iostream": "cpp",
+    "bitset": "cpp"
+  }
+}

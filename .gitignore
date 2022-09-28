@@ -1,0 +1,7 @@
+__pycache__
+*.gch
+a.out*
+tempCodeRunnerFile.*
+
+# OS-specific settings
+.vscode/c_cpp_properties.json
