@@ -1,5 +1,7 @@
 My attempt at solving various competitive programming problems.
 
+A continuation of [CodingPractice](https://github.com/the-chenergy/CodingPractice).
+
 ---
 
 ## Set up your C++ environment
