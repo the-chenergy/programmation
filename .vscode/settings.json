@@ -1,16 +1,18 @@
 {
-  "code-runner.defaultLanguage": "cpp",
+  "[cpp]": {
+    "editor.tabSize": 4
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "cSpell.words": ["endregion", "sortedcontainers"],
   "code-runner.executorMap": {
-    "cpp": "g++-12 -g -O2 -std=gnu++17 -Wall $fullFileName && ./a.out"
+    "cpp": "g++-12 -Wall -Wextra -pedantic -std=c++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
+    "python": "conda activate && python -u $fullFileName"
   },
   "editor.rulers": [80],
+  "python.formatting.yapfArgs": ["--style={BASED_ON_STYLE: google}"],
   "workbench.colorCustomizations": {
     "activityBar.background": "#edd40040"
-  },
-  "files.associations": {
-    "*.inc": "cpp",
-    "algorithm": "cpp",
-    "iostream": "cpp",
-    "bitset": "cpp"
   }
 }
