@@ -7,6 +7,7 @@
 
 using namespace std;
 
+using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
 
@@ -37,15 +38,18 @@ static void _init() {
 #endif
 }
 
-template <typename TFirst, typename TSecond>
+template <class T, size_t size>
+ostream& operator<<(ostream& out, const array<T, size>& x);
+
+template <class TFirst, class TSecond>
 ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x);
 
 template <class... T>
 ostream& operator<<(ostream& out, const tuple<T...> x);
 
-template <typename TContainer, typename T = typename enable_if<
-                                   !is_same<TContainer, string>::value,
-                                   typename TContainer::value_type>::type>
+template <class TContainer,
+          class T = class enable_if<!is_same<TContainer, string>::value,
+                                    class TContainer::value_type>::type>
 ostream& operator<<(ostream& out, const TContainer& x) {
     out << "{";
     string delim;
@@ -53,7 +57,15 @@ ostream& operator<<(ostream& out, const TContainer& x) {
     return out << "}";
 }
 
-template <typename TFirst, typename TSecond>
+template <class T, size_t size>
+ostream& operator<<(ostream& out, const array<T, size>& x) {
+    out << "{";
+    string delim;
+    for (const T& y : x) out << delim << y, delim = ", ";
+    return out << "}";
+}
+
+template <class TFirst, class TSecond>
 ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x) {
     return out << "{" << x.first << ", " << x.second << "}";
 }
@@ -66,13 +78,13 @@ ostream& operator<<(ostream& out, const tuple<T...> x) {
     return out << "}";
 }
 
-template <typename TArg1>
+template <class TArg1>
 static void _trace(const char* labels, const TArg1& arg1) {
     if (labels[0] != '"') cerr << labels + (labels[0] == ' ') << ": ";
     cerr << arg1 << "\n";
 }
 
-template <typename TArg1, typename... TArgs>
+template <class TArg1, class... TArgs>
 static void _trace(const char* labels, const TArg1& arg1,
                    const TArgs&... args) {
     if (labels[0] == ' ') labels++;
