@@ -1,18 +1,17 @@
-SYNC_IO = 0x0
-TRACE_SYS_OUT = 0x0
-LOCAL = 0x01
+SYNC_IO = 0x0  #  Synchronize stdin and stdout
+TRACE_SYS_OUT = 0x0  #  Use stdout for trace and eprint
+LOCAL = 0x01  #  If 0 or not set, "comment" all trace and eprint
 
 if True:
     import array, bisect, cmath, collections, functools, heapq, inspect, io, itertools, math, operator, os, random, re, sys, time
     from collections import ChainMap, Counter, OrderedDict, defaultdict, deque, namedtuple
-
     try:
         import numpy
     except ImportError:
         pass
     try:
         import sortedcontainers
-        from sortedcontainers import SortedDict, SortedKeyList, SortedSet
+        from sortedcontainers import SortedDict, SortedList, SortedSet
     except ImportError:
         pass
 
@@ -92,14 +91,15 @@ if True:
 
 
 def solve(case_id):
+    ...
     
 
 
 def main(args):
     num_cases = 1
     # num_cases = int(input())
-    for case_id in range(num_cases):
-        # print(f'Case #{case_id + 1}: ', end='')
+    for case_id in range(1, num_cases + 1):
+        # print(f'Case #{case_id}: ', end='')
         solve(case_id)
         # print(end='\n')
     return 0
