@@ -6,3 +6,6 @@ tempCodeRunnerFile.*
 
 # OS-specific settings
 .vscode/c_cpp_properties.json
+
+# Local playground
+sandbox/
