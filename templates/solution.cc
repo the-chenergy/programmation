@@ -1,5 +1,6 @@
 // #define SYNC_IO 01 // Synchronize cin and cout
 // #define TRACE_COUT 01 // Use cout for trace and redirect cerr to cout
+// #define NO_MAIN 01 // Do not declare the main function
 // #define LOCAL 01 // If 0 or not set, "comment" all cerr and trace
 
 #pragma region {
@@ -100,13 +101,18 @@ static void _trace(const char* labels, const TArg1& arg1,
 #define trace(...) (void)0
 #endif
 
+#if !NO_MAIN
+void solve_suite();
+int main() { solve_suite(); }
+#endif
+
 #pragma endregion }
 
 void solve(int /* case_id */) {
     
 }
 
-int main() {
+void solve_suite() {
     int num_cases = 1;
     // cin >> num_cases;
     for (int case_id = 1; case_id <= num_cases; case_id++) {
