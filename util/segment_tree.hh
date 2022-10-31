@@ -11,16 +11,16 @@ struct segment_tree {
         // return gcd(x, y);
         return x + y;
     }
-    int size;
+    int _size;
     vector<T> _data;
-    segment_tree(int size) : size(size), _data(2 * size, DEFAULT_VALUE) {}
+    segment_tree(int size) : _size(size), _data(2 * _size, DEFAULT_VALUE) {}
     void update(int index, T new_value) {
-        for (_data[index += size] = new_value; index /= 2;)
+        for (_data[index += _size] = new_value; index /= 2;)
             _data[index] = _get(_data[index * 2], _data[index * 2 + 1]);
     }
     T query(int begin, int end) {
         T res_a = DEFAULT_VALUE, res_b = DEFAULT_VALUE;
-        for (begin += size, end += size; begin < end; begin /= 2, end /= 2) {
+        for (begin += _size, end += _size; begin < end; begin /= 2, end /= 2) {
             if (begin % 2) res_a = _get(res_a, _data[begin++]);
             if (end % 2) res_b = _get(_data[--end], res_b);
         }
