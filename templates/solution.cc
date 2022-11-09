@@ -33,7 +33,6 @@ static void _init() {
 #if !SYNC_IO
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cout.tie(nullptr);
 #endif
 }
 
