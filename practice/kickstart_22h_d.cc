@@ -1,4 +1,4 @@
-// #define SYNC_IO 01 // Synchronize cin and cout
+#define SYNC_IO 01  // Synchronize cin and cout
 // #define TRACE_COUT 01 // Use cout for trace and redirect cerr to cout
 // #define NO_MAIN 01 // Do not declare the main function
 // #define LOCAL 0  // If 0 or not set, "comment" all cerr and trace
@@ -107,7 +107,6 @@ int main() { solve_suite(); }
 
 #pragma endregion }
 
-// WA
 // https://codingcompetitions.withgoogle.com/kickstart/round/00000000008cb1b6/0000000000c47792
 void solve(int /* case_id */) {
     int n;
@@ -118,35 +117,52 @@ void solve(int /* case_id */) {
         cin >> j, j--;
         nxt[i] = j;
     }
-    vector<int> ans(2 * n, 1E9);
+    vector<int> ans(n + 1, 1E9);
     vector<bool> vis(n, 0);
-    vector<int> cs;
+    map<int, int> cs;
     for (int s = 0; s < n; s++) {
         if (vis[s]) continue;
         vis[s] = 1;
         int i = s, l = 0;
         do i = nxt[i], vis[i] = 1, l++;
         while (i != s);
-        cs.push_back(l);
+        cs[l]++;
         ans[l] = 0;
     }
-    sort(cs.begin(), cs.end());
-    int d = 1;
-    for (int i = cs.back() - 1; i > 0; i--) ans[i] = min(ans[i], d);
-    while (cs.size() > 1) {
-        if (d == 1) {
-            for (int i = int(cs.size()) - 1; i > 0; i--)
-                for (int j = i - 1; j >= 0; j--)
-                    ans[cs[i] + cs[j]] = min(ans[cs[i] + cs[j]], d);
-        } else {
-            for (int i = int(cs.size()) - 2; i >= 0; i--)
-                ans[cs[i] + cs.back()] = min(ans[cs[i] + cs.back()], d);
-        }
-        int nc = cs.back() + *(cs.end() - 2);
-        ans[nc] = min(ans[nc], d);
-        for (int i = nc - 1; i > 0; i--) ans[i] = min(ans[i], d + 1);
-        cs.pop_back(), cs.pop_back(), cs.push_back(nc);
+    // {d, tar_i, tar_ct, c}
+    deque<tuple<int, int, int, map<int, int>>> bfs{{0, 0, int(cs.size()), cs}};
+    int mx = 0;
+    while (bfs.size()) {
+        auto [d, ti, tc, c] = bfs.front();
+        bfs.pop_front();
+        if (!d || __builtin_popcount(d) == 1)
+            trace(d, ti, tc, c.size(), *prev(c.end()), bfs.size());
         d++;
+        int nmx = prev(c.end())->first;
+        if (nmx > mx) {
+            for (int m = mx + 1; m < nmx; m++) ans[m] = min(ans[m], d);
+            mx = nmx;
+        }
+        auto it = c.lower_bound(ti);
+        while (tc--) {
+            auto [i, ic] = *it;
+            it++;
+            for (auto [j, jc] : c) {
+                if (i == j && ic == 1)
+                    continue;  // Same cycle having only one copy of
+                int cij = i + j;
+                assert(cij <= n);
+                if (d >= ans[cij]) continue;
+                ans[cij] = d;
+                map<int, int> nc = c;
+                nc[i]--, nc[j]--;
+                if (!nc[i]) nc.erase(i);
+                if (!nc[j]) nc.erase(j);
+                assert(!nc.count(cij));
+                nc[cij] = 1;
+                bfs.push_back({d, cij, 1, nc});
+            }
+        }
     }
     for (int m = 1; m <= n; m++) cout << ans[m] << " ";
 }
