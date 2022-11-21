@@ -1,7 +1,7 @@
 from solution import *
 
 
-def gen(n=2, *, case_id=-1):
+def gen(n=2, m=2, k=2, *, case_id=-1):
     
     print(n,)
 

@@ -5,7 +5,17 @@
   "[python]": {
     "editor.tabSize": 4
   },
-  "cSpell.words": ["endregion", "randint", "sortedcontainers", "trav", "YAPF"],
+  "cSpell.words": [
+    "endregion",
+    "infj",
+    "nanj",
+    "nextafter",
+    "randint",
+    "setrecursionlimit",
+    "sortedcontainers",
+    "trav",
+    "YAPF"
+  ],
   "code-runner.executorMap": {
     "cpp": "g++-12 -std=gnu++17 -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
     "python": "conda activate && python -u $fullFileName"
