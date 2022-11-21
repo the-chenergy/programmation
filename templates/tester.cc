@@ -5,13 +5,13 @@
 
 #include "solution.cc"  // Change this to your solution's file name
 
-static streambuf* old_cin;
-static streambuf* old_cout;
-static streambuf* old_cerr;
-static stringstream my_in, my_out, my_err;
-static vector<clock_t> test_times;
+streambuf* old_cin;
+streambuf* old_cout;
+streambuf* old_cerr;
+stringstream my_in, my_out, my_err;
+clock_t total_test_time;
 
-static void test(int test_id) {
+void test(int test_id) {
     my_in.str(""), my_out.str(""), my_err.str("");
     my_in.clear(), my_out.clear(), my_err.clear();
 
@@ -23,12 +23,12 @@ static void test(int test_id) {
     auto in_content = my_in.str();
     my_in.str(in_content);
     if (test_id != 0) cerr.rdbuf(my_err.rdbuf());
-    test_times.push_back(clock());
+    auto start_time = clock();
 
     // Run solution
     solve_suite();
 
-    test_times.back() = clock() - test_times.back();
+    total_test_time += clock() - start_time;
     cerr.rdbuf(old_cerr);
     auto out_content = my_out.str();
     my_out.str(out_content);
@@ -59,11 +59,9 @@ int main() {
     for (int test_id = 1; test_id <= num_tests; test_id++) {
         test(test_id);
         if (__builtin_popcount(test_id) == 1 || test_id == num_tests) {
-            auto run_time =
-                double(reduce(test_times.begin(), test_times.end())) /
-                CLOCKS_PER_SEC / double(test_times.size());
-            fprintf(stderr, "Passed %i test%c (%.2f s)\n", test_id,
-                    "s"[test_id == 1], run_time);
+            fprintf(stderr, "Passed %i test%c (%.2LF s)\n", test_id,
+                    "s"[test_id == 1],
+                    ld(total_test_time) / CLOCKS_PER_SEC / test_id);
         }
     }
     return 0;

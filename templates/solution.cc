@@ -1,7 +1,7 @@
-// #define SYNC_IO 01 // Synchronize cin and cout
-// #define TRACE_COUT 01 // Use cout for trace and redirect cerr to cout
-// #define NO_MAIN 01 // Do not declare the main function
-// #define LOCAL 01 // If 0 or not set, "comment" all cerr and trace
+// #define SYNC_IO 01  // Synchronize cin and cout
+// #define TRACE_COUT 01  // Use stdout for trace and eprintf
+// #define NO_MAIN 01  // Do not declare the main function
+// #define LOCAL 0  // If 0 or not set, "comment" all trace and eprintf
 
 #pragma region {
 #include <bits/stdc++.h>
@@ -11,25 +11,19 @@ using namespace std;
 using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
+using ld = long double;
+using vi = vector<int>;
+using pii = pair<int, int>;
 
-#ifdef TRACE_COUT
-#define cerr cout
-#endif
+#define len(x) int((x).size())
+#define sz len
 
-#if !LOCAL
-#define cerr \
-    if (false) cerr
-#define fprintf \
-    if (false) fprintf
-#if TRACE_COUT
-#define cout \
-    if (false) cout
-#endif
-#endif
+#define rep(i, b, e) for (int i = b; i < (e); i++)
+#define trav(x, a) for (auto& x : a)
+#define all(x) (x).begin(), (x).end()
 
-static void _init() __attribute__((constructor));
-
-static void _init() {
+void _init() __attribute__((constructor));
+void _init() {
 #if !SYNC_IO
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -38,18 +32,18 @@ static void _init() {
 
 namespace std {
 template <typename T, size_t size>
-static ostream& operator<<(ostream& out, const array<T, size>& x);
+ostream& operator<<(ostream& out, const array<T, size>& x);
 
 template <typename TFirst, typename TSecond>
-static ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x);
+ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x);
 
 template <typename... T>
-static ostream& operator<<(ostream& out, const tuple<T...> x);
+ostream& operator<<(ostream& out, const tuple<T...> x);
 
 template <typename TContainer, typename T = typename enable_if<
                                    !is_same<TContainer, string>::value,
                                    typename TContainer::value_type>::type>
-static ostream& operator<<(ostream& out, const TContainer& x) {
+ostream& operator<<(ostream& out, const TContainer& x) {
     out << "{";
     string delim;
     for (const T& y : x) out << delim << y, delim = ", ";
@@ -57,7 +51,7 @@ static ostream& operator<<(ostream& out, const TContainer& x) {
 }
 
 template <typename T, size_t size>
-static ostream& operator<<(ostream& out, const std::array<T, size>& x) {
+ostream& operator<<(ostream& out, const std::array<T, size>& x) {
     out << "{";
     string delim;
     for (const T& y : x) out << delim << y, delim = ", ";
@@ -65,12 +59,12 @@ static ostream& operator<<(ostream& out, const std::array<T, size>& x) {
 }
 
 template <typename TFirst, typename TSecond>
-static ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x) {
+ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x) {
     return out << "{" << x.first << ", " << x.second << "}";
 }
 
 template <typename... T>
-static ostream& operator<<(ostream& out, const tuple<T...> x) {
+ostream& operator<<(ostream& out, const tuple<T...> x) {
     out << "{";
     string delim;
     apply([&](auto&... y) { (..., (out << delim << y, delim = ", ")); }, x);
@@ -78,26 +72,37 @@ static ostream& operator<<(ostream& out, const tuple<T...> x) {
 }
 }  // namespace std
 
+#if TRACE_COUT
+#    define _trace_out cout
+#else
+#    define _trace_out cerr
+#endif
+
 template <typename TArg1>
-static void _trace(const char* labels, const TArg1& arg1) {
-    if (labels[0] != '"') cerr << labels + (labels[0] == ' ') << ": ";
-    cerr << arg1 << "\n";
+void _trace(const char* labels, const TArg1& arg1) {
+    if (labels[0] != '"') _trace_out << labels + (labels[0] == ' ') << ": ";
+    _trace_out << arg1 << "\n";
 }
 
 template <typename TArg1, typename... TArgs>
-static void _trace(const char* labels, const TArg1& arg1,
-                   const TArgs&... args) {
+void _trace(const char* labels, const TArg1& arg1, const TArgs&... args) {
     if (labels[0] == ' ') labels++;
     size_t first_label_size = strchr(labels, ',') - labels;
-    if (labels[0] != '"') cerr.write(labels, first_label_size) << ": ";
-    cerr << arg1 << ", ";
+    if (labels[0] != '"') _trace_out.write(labels, first_label_size) << ": ";
+    _trace_out << arg1 << ", ";
     _trace(labels + first_label_size + 1, args...);
 }
 
 #if LOCAL
-#define trace(...) _trace(#__VA_ARGS__, __VA_ARGS__)
+#    define trace(...) _trace(#__VA_ARGS__, __VA_ARGS__)
+#    if TRACE_COUT
+#        define eprintf printf
+#    else
+#        define eprintf(...) fprintf(stderr, __VA_ARGS__)
+#    endif
 #else
-#define trace(...) (void)0
+#    define trace(...) (void)0
+#    define eprintf(...) (void)0
 #endif
 
 #if !NO_MAIN
@@ -106,6 +111,8 @@ int main() { solve_suite(); }
 #endif
 
 #pragma endregion }
+
+
 
 void solve(int /* case_id */) {
     
@@ -118,5 +125,7 @@ void solve_suite() {
         // cout << "Case #" << case_id << ": ";
         solve(case_id);
         // cout << "\n";
+
+        // fprintf(stderr, "(%.2LF s)\n", ld(clock()) / CLOCKS_PER_SEC);
     }
 }
