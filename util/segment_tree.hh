@@ -1,29 +1,34 @@
+
+#define binary(f) [&](auto _l, auto _r) { return f(_l, _r); }
+
+template <typename T>
+// Provides O(log n) range query for any associative binary function and
+// O(log n) single-element update.
+// Example: segment_tree<int> st(binary(plus()), n);
 struct segment_tree {
-    using T = int;
-    // using T = ll;
-    const T DEFAULT_VALUE = 0;
-    // const T DEFAULT_VALUE = INT_MAX;
-    // const T DEFAULT_VALUE = INT_MIN;
-    // const T DEFAULT_VALUE = ;
-    T _get(T x, T y) {
-        // return min(x, y);
-        // return max(x, y);
-        // return gcd(x, y);
-        return x + y;
-    }
     int _size;
+    T _default;
     vector<T> _data;
-    segment_tree(int size) : _size(size), _data(2 * _size, DEFAULT_VALUE) {}
-    void update(int index, T new_value) {
-        for (_data[index += _size] = new_value; index /= 2;)
-            _data[index] = _get(_data[index * 2], _data[index * 2 + 1]);
+    function<T(T, T)> _get;
+    segment_tree(function<T(T, T)> f, int size, T value = 0) : _get(f) {
+        assign(size, value);
     }
-    T query(int begin, int end) {
-        T res_a = DEFAULT_VALUE, res_b = DEFAULT_VALUE;
-        for (begin += _size, end += _size; begin < end; begin /= 2, end /= 2) {
-            if (begin % 2) res_a = _get(res_a, _data[begin++]);
-            if (end % 2) res_b = _get(_data[--end], res_b);
+    void assign(int size, T value = 0) {
+        _size = size;
+        _default = value;
+        _data.assign(2 * size, value);
+    }
+    void update(int i, T x) {
+        for (_data[i += _size] = x; i /= 2;)
+            _data[i] = _get(_data[i * 2], _data[i * 2 + 1]);
+    }
+    // Queries f(...) in range [inc b, exc e)
+    T query(int b, int e) {
+        T x = _default, y = _default;
+        for (b += _size, e += _size; b < e; b /= 2, e /= 2) {
+            if (b % 2) x = _get(x, _data[b++]);
+            if (e % 2) y = _get(_data[--e], y);
         }
-        return _get(res_a, res_b);
+        return _get(x, y);
     }
 };
