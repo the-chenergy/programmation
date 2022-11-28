@@ -10,14 +10,16 @@
     "infj",
     "nanj",
     "nextafter",
+    "programmation",
     "randint",
     "setrecursionlimit",
     "sortedcontainers",
     "trav",
+    "Wshadow",
     "YAPF"
   ],
   "code-runner.executorMap": {
-    "cpp": "g++-12 -std=gnu++17 -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
+    "cpp": "g++-12 -std=gnu++17 -Wno-fatal-errors -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
     "python": "conda activate && python -u $fullFileName"
   },
   "editor.rulers": [80],

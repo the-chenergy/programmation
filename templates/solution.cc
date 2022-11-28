@@ -4,6 +4,12 @@
 // #define LOCAL 0  // If 0 or not set, "comment" all trace and eprintf
 
 #pragma region {
+#if LOCAL
+#    define _GLIBCXX_DEBUG 1
+#    define _GLIBCXX_DEBUG_PEDANTIC 1
+#    define _FORTIFY_SOURCE 2
+#endif
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,12 +21,21 @@ using ld = long double;
 using vi = vector<int>;
 using pii = pair<int, int>;
 
-#define len(x) int((x).size())
-#define sz len
-
 #define rep(i, b, e) for (int i = b; i < (e); i++)
 #define trav(x, a) for (auto& x : a)
-#define all(x) (x).begin(), (x).end()
+#define all(x) begin(x), end(x)
+
+template <typename T>
+int len(const T& x) {
+    return int(x.size());
+}
+
+template <typename T, size_t size>
+int len(const T (&)[size]) {
+    return size;
+}
+
+#define sz len
 
 void _init() __attribute__((constructor));
 void _init() {
@@ -35,18 +50,27 @@ template <typename T, size_t size>
 ostream& operator<<(ostream& out, const array<T, size>& x);
 
 template <typename TFirst, typename TSecond>
-ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x);
+ostream& operator<<(ostream& out, const pair<TFirst, TSecond>& x);
 
 template <typename... T>
-ostream& operator<<(ostream& out, const tuple<T...> x);
+ostream& operator<<(ostream& out, const tuple<T...>& x);
 
-template <typename TContainer, typename T = typename enable_if<
-                                   !is_same<TContainer, string>::value,
-                                   typename TContainer::value_type>::type>
+template <typename TContainer,
+          typename T = enable_if_t<!is_same<TContainer, string>::value,
+                                   typename TContainer::value_type>>
 ostream& operator<<(ostream& out, const TContainer& x) {
     out << "{";
     string delim;
-    for (const T& y : x) out << delim << y, delim = ", ";
+    for (auto& y : x) out << delim << y, delim = ", ";
+    return out << "}";
+}
+
+template <typename T, size_t size,
+          enable_if_t<!is_same<T, char>::value, int> = 0>
+ostream& operator<<(ostream& out, const T (&x)[size]) {
+    out << "{";
+    string delim;
+    for (auto& y : x) out << delim << y, delim = ", ";
     return out << "}";
 }
 
@@ -54,17 +78,17 @@ template <typename T, size_t size>
 ostream& operator<<(ostream& out, const std::array<T, size>& x) {
     out << "{";
     string delim;
-    for (const T& y : x) out << delim << y, delim = ", ";
+    for (auto& y : x) out << delim << y, delim = ", ";
     return out << "}";
 }
 
 template <typename TFirst, typename TSecond>
-ostream& operator<<(ostream& out, const pair<TFirst, TSecond> x) {
+ostream& operator<<(ostream& out, const pair<TFirst, TSecond>& x) {
     return out << "{" << x.first << ", " << x.second << "}";
 }
 
 template <typename... T>
-ostream& operator<<(ostream& out, const tuple<T...> x) {
+ostream& operator<<(ostream& out, const tuple<T...>& x) {
     out << "{";
     string delim;
     apply([&](auto&... y) { (..., (out << delim << y, delim = ", ")); }, x);
@@ -93,22 +117,54 @@ void _trace(const char* labels, const TArg1& arg1, const TArgs&... args) {
     _trace(labels + first_label_size + 1, args...);
 }
 
+template <typename T>
+void _view(const T& x) {
+    _trace_out << x;
+}
+
+template <typename T, typename... TRange>
+void _view(const T& x, int b, int e, TRange... ranges) {
+    b = max(0, min(len(x), b)), e = max(b, min(len(x), e));
+    string delim = "";
+    auto it = begin(x);
+    advance(it, b);
+    auto& out = _trace_out;
+    out << "{";
+    for (; b < e; it++, b++) out << delim, _view(*it, ranges...), delim = ", ";
+    out << "}";
+}
+
 #if LOCAL
-#    define trace(...) _trace(#__VA_ARGS__, __VA_ARGS__)
 #    if TRACE_COUT
 #        define eprintf printf
 #    else
 #        define eprintf(...) fprintf(stderr, __VA_ARGS__)
 #    endif
+#    define trace(...) _trace(#__VA_ARGS__, __VA_ARGS__)
+#    define view(...) _view(__VA_ARGS__), trace("")
+#    define _local
 #else
-#    define trace(...) (void)0
+// printf into cerr
 #    define eprintf(...) (void)0
+// trace(x, ...) -> prints "x: {x}, ..." to cerr
+#    define trace(...) (void)0
+// view(X, a, b, ...) prints X[a:b, ...] to cerr
+#    define view(...) (void)0
+#    define _local while (false)
 #endif
 
 #if !NO_MAIN
 void solve_suite();
 int main() { solve_suite(); }
 #endif
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+
+// Additional library code
+
+
+#pragma GCC diagnostic pop
 
 #pragma endregion }
 
@@ -119,7 +175,10 @@ void solve(int /* case_id */) {
 }
 
 void solve_suite() {
-    int num_cases = 1;
+    // freopen("./sandbox/i.txt", "r", stdin);
+    // freopen("./sandbox/o.txt", "w", stdout);
+
+    int num_cases = 1 << 0;
     // cin >> num_cases;
     for (int case_id = 1; case_id <= num_cases; case_id++) {
         // cout << "Case #" << case_id << ": ";
