@@ -7,23 +7,23 @@ if True:
     from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
     from cmath import infj, nanj, phase, polar, rect
     from collections import ChainMap, Counter, OrderedDict, abc, defaultdict, deque, namedtuple
-    from functools import cache, cached_property, cmp_to_key, lru_cache, partial, partialmethod, reduce, singledispatch, singledispatchmethod, total_ordering, update_wrapper, wraps
+    from functools import cached_property, cmp_to_key, lru_cache, partial, partialmethod, reduce, singledispatch, singledispatchmethod, total_ordering, update_wrapper, wraps
     from heapq import heapify, heappop, heappush, heappushpop, heapreplace, merge, nlargest, nsmallest
     from itertools import accumulate, chain, combinations, combinations_with_replacement, compress, count, cycle, dropwhile, filterfalse, groupby, islice, permutations, product, repeat, starmap, takewhile, tee, zip_longest
-    from math import acos, acosh, asin, asinh, atan, atan2, atanh, ceil, comb, copysign, cos, cosh, degrees, dist, e, erf, erfc, exp, expm1, fabs, factorial, floor, fmod, frexp, fsum, gamma, gcd, hypot, inf, isclose, isfinite, isinf, isnan, isqrt, lcm, ldexp, lgamma, log, log10, log1p, log2, modf, nan, nextafter, perm, pi, prod, radians, remainder, sin, sinh, sqrt, tan, tanh, tau, trunc, ulp
-    from random import betavariate, choice, choices, expovariate, gammavariate, gauss, getrandbits, getstate, lognormvariate, normalvariate, paretovariate, randbytes, randint, randrange, sample, seed, setstate, shuffle, triangular, uniform, vonmisesvariate, weibullvariate
+    from math import acos, acosh, asin, asinh, atan, atan2, atanh, ceil, comb, copysign, cos, cosh, degrees, dist, e, erf, erfc, exp, expm1, fabs, factorial, floor, fmod, frexp, fsum, gamma, gcd, hypot, inf, isclose, isfinite, isinf, isnan, isqrt, ldexp, lgamma, log, log10, log1p, log2, modf, nan, perm, pi, prod, radians, remainder, sin, sinh, sqrt, tan, tanh, tau, trunc
+    from random import betavariate, choice, choices, expovariate, gammavariate, gauss, getrandbits, getstate, lognormvariate, normalvariate, paretovariate, randint, randrange, sample, seed, setstate, shuffle, triangular, uniform, vonmisesvariate, weibullvariate
     from sys import setrecursionlimit, stderr, stdin, stdout
     try:
-        import json
+        import json # type: ignore
     except ImportError:
         pass
     try:
-        import numpy
+        import numpy # type: ignore
     except ImportError:
         pass
     try:
-        import sortedcontainers
-        from sortedcontainers import SortedDict, SortedItemsView, SortedKeyList, SortedKeysView, SortedList, SortedListWithKey, SortedSet, SortedValuesView
+        import sortedcontainers # type: ignore
+        from sortedcontainers import SortedDict, SortedItemsView, SortedKeyList, SortedKeysView, SortedList, SortedListWithKey, SortedSet, SortedValuesView # type: ignore
     except ImportError:
         pass
 
@@ -115,7 +115,7 @@ def solve(case_id):
 
 
 def main(args):
-    num_cases = 1
+    num_cases = 1 << 0
     # num_cases = int(input())
     for case_id in range(1, num_cases + 1):
         # print(f'Case #{case_id}: ', end='')
