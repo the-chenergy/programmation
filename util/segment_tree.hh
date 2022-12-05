@@ -1,5 +1,5 @@
 
-#define binary(f) [&](auto _l, auto _r) { return f(_l, _r); }
+#define binary(f) [](auto _l, auto _r) { return f(_l, _r); }
 
 template <typename T>
 // Provides O(log n) range query for any associative binary function and
@@ -10,7 +10,7 @@ struct segment_tree {
     T _default;
     vector<T> _data;
     function<T(T, T)> _get;
-    segment_tree(function<T(T, T)> f, int size, T value = 0) : _get(f) {
+    segment_tree(function<T(T, T)> f, int size = 0, T value = 0) : _get(f) {
         assign(size, value);
     }
     void assign(int size, T value = 0) {
