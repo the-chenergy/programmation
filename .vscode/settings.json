@@ -6,6 +6,7 @@
     "editor.tabSize": 4
   },
   "cSpell.words": [
+    "amax",
     "endregion",
     "infj",
     "nanj",
@@ -19,8 +20,8 @@
     "YAPF"
   ],
   "code-runner.executorMap": {
-    "cpp": "g++-12 -std=gnu++17 -Wno-fatal-errors -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
-    "python": "conda activate && python -u $fullFileName"
+    "cpp": "g++-12 -std=gnu++17 -Wno-fatal-errors -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL=1 -DDEBUG=1 -ftrapv -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
+    "python": "conda activate py308 && python -u $fullFileName"
   },
   "editor.rulers": [80],
   "python.formatting.yapfArgs": ["--style={BASED_ON_STYLE: google}"],
