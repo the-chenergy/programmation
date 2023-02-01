@@ -3,10 +3,11 @@ TRACE_SYS_OUT = 0x0  #  Use stdout for trace and eprint
 LOCAL = 0x01  #  If 0 or not set, "comment" all trace and eprint
 
 if True:
-    import array, bisect, calendar, cmath, collections, functools, heapq, inspect, io, itertools, math, operator, os, random, re, sys, time
+    import array, bisect, calendar, cmath, collections, fractions, functools, heapq, inspect, io, itertools, math, operator, os, random, re, sys, time
     from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
     from cmath import infj, nanj, phase, polar, rect
     from collections import ChainMap, Counter, OrderedDict, abc, defaultdict, deque, namedtuple
+    from fractions import Fraction
     from functools import cached_property, cmp_to_key, lru_cache, partial, partialmethod, reduce, singledispatch, singledispatchmethod, total_ordering, update_wrapper, wraps
     from heapq import heapify, heappop, heappush, heappushpop, heapreplace, merge, nlargest, nsmallest
     from itertools import accumulate, chain, combinations, combinations_with_replacement, compress, count, cycle, dropwhile, filterfalse, groupby, islice, permutations, product, repeat, starmap, takewhile, tee, zip_longest
