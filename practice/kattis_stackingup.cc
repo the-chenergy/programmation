@@ -1,3 +1,22 @@
+// Solution to Stacking Up, a problem from the ICPC NAQ 2021
+// (https://open.kattis.com/problems/stackingup)
+// #bitmask
+//
+// Every "+" operation decrements all previous elements by one, so we just need
+// to calculate in advance how many "+"s we need to construct everything to the
+// the right, and anticipate that by making a larger number for the current
+// element instead. For instance, imagine if we had to make {5, 3}, we know in
+// order to make the 3 we need at least two "+" operations, so we need to make
+// the first element 2 bigger to be 7 instead, which after suffering the
+// decrementing twice would become the target 5.
+//
+// Now what's the most efficient way to get to any number? That is of course by
+// binary adding, AKA doubling at the right times. As an example, to get to 42,
+// instead of running "1" followed by "1+" 41 times (O(N) operations in
+// general), we can do "11+d+1+d+d+1+d+" which is only O(log N) operations. This
+// turns the problem into basically counting bits and working out when to double
+// based on when there's a one in the bit string of a number.
+
 // #define SYNC_IO 01  // Synchronize standard IO (cin, scanf, cout, printf)
 // #define TRACE_COUT 01  // Use stdout instead of stderr for trace and eprintf
 // #define NO_MAIN 01  // Do not declare the main function
@@ -56,12 +75,26 @@ void solve_suite(); int main() { solve_suite(); }
 #pragma GCC diagnostic pop
 #pragma endregion programmation }
 
-
+int n;
+ll a[1009],p;
 
 void solve() {
-    
+    cin>>n;
     if (0 || !cin) exit(0);
-    
+    for(int i=0;i<n;i++)cin>>a[i];
+    for(int i=n;~--i;){
+        a[i]+=p;
+        p+=__lg(a[i])+__builtin_popcountll(a[i])-1;
+    }
+    view(a,0,n);
+    for(int i=0;i<n;i++){
+        cout<<"1";
+        for(int b=int(__lg(a[i]));~--b;){
+            cout<<"d+";
+            if(a[i]>>b&1)cout<<"1+";
+        }
+        debug cout<<"\n";
+    }
 }
 
 void solve_suite() {
