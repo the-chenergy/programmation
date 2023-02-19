@@ -1,5 +1,13 @@
 ---
+Language: Cpp
 BasedOnStyle: Google
 AccessModifierOffset: -2
-IndentWidth: 4
+AlignTrailingComments: false
 IndentPPDirectives: AfterHash
+IndentWidth: 4
+
+---
+Language: Java
+BasedOnStyle: Chromium
+ColumnLimit: 80
+IndentWidth: 4
