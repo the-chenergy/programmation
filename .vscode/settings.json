@@ -27,7 +27,7 @@
     "YAPF"
   ],
   "code-runner.executorMap": {
-    "cpp": "g++-12 -DDEBUG=1 -Wno-fatal-errors -std=gnu++17 -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL=1 -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
+    "cpp": "g++-12 -DDEBUG=01 -Wno-fatal-errors -std=gnu++17 -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL=01 -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
     "python": "conda activate && python -u $fullFileName"
   },
   "editor.rulers": [80],
