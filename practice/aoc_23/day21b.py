@@ -228,10 +228,12 @@ corn_upto = [[[[
         for x2 in range(w)) for d in range(2 * h)
 ] for x in range(3)] for y in range(3)] for p in range(2)]
 
-base = [
-    sum(1 for y in range(h) for x in range(w)
-        if g[y][x] != '#' and (y + x) % 2 == p) for p in range(2)
-]
+# base = [
+#     sum(1 for y in range(h) for x in range(w)
+#         if g[y][x] != '#' and (y + x) % 2 == p) for p in range(2)
+# ]
+
+base = [corn_upto[p][0][0][-1] for p in range(2)]
 
 ed = 0
 edb = set()
@@ -310,6 +312,3 @@ ans += sum(inner)
 print(ans)
 if T:
     print(T[0])
-
-print(ans - BL**2)
-# My code was "just a bit off" from the brute-force test results -- off by BL**2 by eyeballing ;)
