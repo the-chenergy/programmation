@@ -1,15 +1,15 @@
 ---
 Language: Cpp
 BasedOnStyle: Google
-AccessModifierOffset: -2
+ColumnLimit: 0
+AccessModifierOffset: -4
 AlignTrailingComments: false
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
-ContinuationIndentWidth: 8
 IndentPPDirectives: AfterHash
 IndentWidth: 4
 
 ---
 Language: Java
 BasedOnStyle: Chromium
-ColumnLimit: 80
+ColumnLimit: 0
 IndentWidth: 4
