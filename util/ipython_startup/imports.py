@@ -1,7 +1,7 @@
-from copy import deepcopy
+from cmath import infj, nanj, phase, polar, rect
 from collections import abc
 from collections.abc import Callable, Iterable, Iterator
-from cmath import infj, nanj, phase, polar, rect
+from copy import deepcopy
 from fractions import Fraction
 from sys import setrecursionlimit, stderr, stdin, stdout
 from typing import Any
