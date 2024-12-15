@@ -39,6 +39,8 @@ import sys
 import time
 import typing
 
+from builtins import *  # type: ignore
+
 try:
     import numpy  # type: ignore
 except ImportError:
