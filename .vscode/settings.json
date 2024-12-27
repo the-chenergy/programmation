@@ -28,7 +28,7 @@
     "YAPF"
   ],
   "code-runner.executorMap": {
-    "cpp": "g++-13 -DDEBUG=01 -Wno-fatal-errors -std=gnu++17 -Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL=01 -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
+    "cpp": "g++-14 -DDEBUG=01 -Wno-fatal-errors -std=c++23 -Wall -Wextra -pedantic -O2 -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unknown-pragmas -DLOCAL=01 -fno-sanitize-recover -fstack-protector $fullFileName && ./a.out",
     "python": "conda activate programmation && python -u $fullFileName"
   },
   "workbench.colorCustomizations": {

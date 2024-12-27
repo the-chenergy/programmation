@@ -1,12 +1,10 @@
 My attempt at solving various competitive programming problems.
 
-A continuation of [CodingPractice](https://github.com/the-chenergy/CodingPractice).
-
 ---
 
 ## Set up your C++ environment
 
-1.  Download GNU GCC based on your OS:
+1.  Download GCC based on your OS:
 
     - macOS: `brew install gcc`
 
@@ -18,11 +16,11 @@ A continuation of [CodingPractice](https://github.com/the-chenergy/CodingPractic
         {
           "name": "<anything meaningful>",
           "includePath": ["${default}"],
-          "defines": [],
+          "defines": ["LOCAL=1", "DEBUG=1"],
           "compilerPath": "<path to installed GNU g++>",
-          "cStandard": "gnu17",
-          "cppStandard": "gnu++17",
-          "intelliSenseMode": "<your os>-gcc-arm64"
+          "cStandard": "c23",
+          "cppStandard": "c++23",
+          "intelliSenseMode": "<based on your OS>"
         }
       ],
       "version": 4
